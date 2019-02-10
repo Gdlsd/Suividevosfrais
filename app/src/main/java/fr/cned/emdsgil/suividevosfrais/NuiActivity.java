@@ -153,7 +153,7 @@ public class NuiActivity extends AppCompatActivity {
      * Retour à l'activité principale (le menu)
      */
     private void retourActivityPrincipale() {
-        Intent intent = new Intent(NuiActivity.this, MainActivity.class);
+        Intent intent = new Intent(NuiActivity.this, MenuActivity.class);
         startActivity(intent);
     }
 }

@@ -153,7 +153,7 @@ public class RepActivity extends AppCompatActivity {
      * Retour à l'activité principale (le menu)
      */
     private void retourActivityPrincipale() {
-        Intent intent = new Intent(RepActivity.this, MainActivity.class);
+        Intent intent = new Intent(RepActivity.this, MenuActivity.class);
         startActivity(intent);
     }
 }

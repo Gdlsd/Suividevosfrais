@@ -91,16 +91,14 @@ public class HfRecapActivity extends AppCompatActivity {
 			public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
 				afficheListe() ;				
 			}
-    	});       	
+    	});
     }
-    
-    
 
 	/**
 	 * Retour à l'activité principale (le menu)
 	 */
 	private void retourActivityPrincipale() {
-		Intent intent = new Intent(HfRecapActivity.this, MainActivity.class) ;
+		Intent intent = new Intent(HfRecapActivity.this, MenuActivity.class) ;
 		startActivity(intent) ;   					
 	}
 }

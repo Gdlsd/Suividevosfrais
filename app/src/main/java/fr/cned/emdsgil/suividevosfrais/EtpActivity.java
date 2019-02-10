@@ -153,7 +153,7 @@ public class EtpActivity extends AppCompatActivity {
      * Retour à l'activité principale (le menu)
      */
     private void retourActivityPrincipale() {
-        Intent intent = new Intent(EtpActivity.this, MainActivity.class);
+        Intent intent = new Intent(EtpActivity.this, MenuActivity.class);
         startActivity(intent);
     }
 }
