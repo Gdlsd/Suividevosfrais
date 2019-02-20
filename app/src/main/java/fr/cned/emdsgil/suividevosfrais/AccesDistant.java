@@ -19,6 +19,12 @@ public class AccesDistant implements AsyncResponse {
     //constante
     private static final String SERVERADDR = "http://192.168.1.18/suividevosfrais/serveursuivifrais.php";
     private Controle controle;
+    private Context contexte;
+
+
+    public Context getContexte() {
+        return contexte;
+    }
 
     public AccesDistant() {
         super();
@@ -48,6 +54,8 @@ public class AccesDistant implements AsyncResponse {
                     String prenom = info.getString("prenom");
 
                     Visiteur visiteur = new Visiteur(id, nom, prenom);
+                    contexte = new MainActivity();
+                    Serializer.serialize(visiteur, contexte);
 
                     if (id != null) {
                         Log.d("authentification OK", "******************* C'est OK pour " + message[1]);

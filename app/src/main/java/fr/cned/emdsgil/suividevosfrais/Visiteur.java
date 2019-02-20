@@ -2,10 +2,11 @@ package fr.cned.emdsgil.suividevosfrais;
 
 import org.json.JSONArray;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Visiteur {
+public class Visiteur implements Serializable {
     private String id;
     private String nom;
     private String prenom;
