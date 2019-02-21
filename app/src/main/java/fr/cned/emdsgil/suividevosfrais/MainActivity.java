@@ -3,6 +3,7 @@ package fr.cned.emdsgil.suividevosfrais;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,10 +19,15 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
 
+import fr.cned.emdsgil.suividevosfrais.controleur.Controle;
+
+import static fr.cned.emdsgil.suividevosfrais.controleur.Controle.PREF_ID;
+
 public class MainActivity extends AppCompatActivity {
 
     private static AccesDistant accesDistant;
     private Context context;
+    private Controle controle;
 
     public MainActivity() {
         this.accesDistant = new AccesDistant();
@@ -31,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        controle = Controle.getInstance(this);
         setContentView(R.layout.activity_main);
         cmdValider_clic();
     }
@@ -48,11 +55,11 @@ public class MainActivity extends AppCompatActivity {
                 loginmdp.add(login);
                 loginmdp.add(mdp);
                 JSONArray donnees = new JSONArray(loginmdp);
+                controle.getInstance(MainActivity.this).authentification(donnees);
 
-                accesDistant.envoi("authentification", donnees);
 
-                Visiteur visiteur = recupSerializeVisiteur();
 
+                /*
                 if(visiteur != null)
                 {
                     accesMenuPrincipal();
@@ -61,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
                 {
                     Toast.makeText(context, "Mot de passe ou identifiant erroné(s)", 5).show();
                 }
+                */
 
             }
         });
@@ -74,31 +82,4 @@ public class MainActivity extends AppCompatActivity {
         startActivity(menuActivity);
     }
 
-    private Visiteur recupSerializeVisiteur() {
-        /* Pour éviter le warning "Unchecked cast from Object to Hash" produit par un casting direct :
-         * Global.listFraisMois = (Hashtable<Integer, FraisMois>) Serializer.deSerialize(Global.filename, MenuActivity.this);
-         * On créé un Hashtable générique <?,?> dans lequel on récupère l'Object retourné par la méthode deSerialize, puis
-         * on cast chaque valeur dans le type attendu.
-         * Seulement ensuite on affecte cet Hastable à Global.listFraisMois.
-         */
-        Hashtable<?, ?> monHash = (Hashtable<?, ?>) Serializer.deSerialize(MainActivity.this);
-        if (monHash != null) {
-            Hashtable<Integer, Visiteur> monHashCast = new Hashtable<>();
-            for (Hashtable.Entry<?, ?> entry : monHash.entrySet()) {
-                monHashCast.put((Integer) entry.getKey(), (Visiteur) entry.getValue());
-                return (Visiteur) entry.getValue();
-            }
-            Global.unVisiteur = monHashCast;
-        }
-        // si rien n'a été récupéré, il faut créer la liste
-        if (Global.unVisiteur == null) {
-            Global.unVisiteur = new Hashtable<>();
-            /* Retrait du type de l'HashTable (Optimisation Android Studio)
-             * Original : Typage explicit =
-             * Global.listFraisMois = new Hashtable<Integer, FraisMois>();
-             */
-
-        }
-        return null;
-    }
 }
