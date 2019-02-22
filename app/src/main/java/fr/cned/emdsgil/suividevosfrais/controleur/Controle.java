@@ -89,10 +89,10 @@ public class Controle {
         Log.d("Controleur-testVisiteur ", "******" + visiteur.getId() + " " + visiteur.getPrenom() + " " + visiteur.getNom());
         if(visiteur.getId() != null)
         {
-            Log.d("TEST VRAI", "********** VRAI PUTAIN");
+            Log.d("TEST VRAI", "********** VRAI");
             return true;
         }
-            Log.d("TEST FAUX", "********** FAUX SA MERE");
+            Log.d("TEST FAUX", "********** FAUX");
         return false;
     }
     public void setVisiteur(Visiteur visiteur){
