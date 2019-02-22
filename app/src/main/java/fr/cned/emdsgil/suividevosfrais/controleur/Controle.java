@@ -1,63 +1,100 @@
 package fr.cned.emdsgil.suividevosfrais.controleur;
 
 import android.content.Context;
-import android.content.SharedPreferences;
+
 import android.util.Log;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import fr.cned.emdsgil.suividevosfrais.AccesDistant;
+
+import fr.cned.emdsgil.suividevosfrais.Global;
+
+import fr.cned.emdsgil.suividevosfrais.MainActivity;
+import fr.cned.emdsgil.suividevosfrais.Serializer;
 import fr.cned.emdsgil.suividevosfrais.Visiteur;
 
-import static android.content.Context.MODE_PRIVATE;
+
 
 public class Controle {
 
     private static Controle instance = null;
     private static Context contexte;
     private static Visiteur visiteur;
-    private static AccesDistant accesDistant = new AccesDistant();
-
-    public final static  String PREF_ID = "ID_VISITEUR";
+    private static AccesDistant accesDistant;
 
 
     private Controle() {super();}
 
-    public final static Controle getInstance(Context contexte)
+    public static final  Controle getInstance(Context contexte)
     {
-        if(contexte != null)
-        {
+        if(contexte != null){
             Controle.contexte = contexte;
         }
         if(Controle.instance == null)
         {
             Controle.instance = new Controle();
+
+            //Param accès BDD distante
+            accesDistant = new AccesDistant();
         }
 
         return Controle.instance;
     }
 
-    public void authentification(JSONArray donnees)
+    public void authentification( String login, String password)
     {
-        accesDistant.envoi("authentification", donnees);
-    }
+        List loginmdp = new ArrayList();
+        loginmdp.add(login);
+        loginmdp.add(password);
+        JSONArray donnees = new JSONArray(loginmdp);
 
+        accesDistant.envoi("authentification", donnees);
+
+        if(visiteur != null)
+        {
+            creerVisiteur(visiteur.getId(), visiteur.getNom(), visiteur.getPrenom(), contexte);
+
+        }
+        else
+        {
+            Toast.makeText(contexte, "Mot de passe ou identifiant erroné(s)", Toast.LENGTH_LONG).show();
+            Log.d("Controleur-AUTH ", "******PROBLEME" );
+        }
+    }
 
 
     public void creerVisiteur(String id, String nom, String prenom, Context contexte){
-        Visiteur visiteur = new Visiteur(id, nom, prenom);
-        Log.d("Controleur ", "******" + visiteur.getId() + " " + visiteur.getPrenom() + " " + visiteur.getNom());
-        SharedPreferences.Editor editor = contexte.getSharedPreferences(PREF_ID, MODE_PRIVATE).edit();
-        editor.putString("idVisiteur", visiteur.getId());
-        editor.apply();
+        Log.d("Controleur-CREER VISITEUR ", "******" + visiteur.getId() + " " + visiteur.getPrenom() + " " + visiteur.getNom());
+        //Serializer.serialize(Global.listFraisMois, context);
 
-
-        SharedPreferences prefs = contexte.getSharedPreferences(PREF_ID, MODE_PRIVATE);
-        String restoreText = prefs.getString("idVisiteur", "non");
-        Log.d("RECUP DATA : ", "*******" + restoreText);
+        Serializer.serialize(visiteur, contexte);
         /*accesDistant.envoi("recupFrais", visiteur.convertToJSONArray());*/
     }
 
+    private static void recupSerializeVisiteur(Context contexte)
+    {
+        visiteur = (Visiteur)Serializer.deSerialize(contexte);
+        Log.d("Visiteur DESERIALIZE ", "******" + visiteur.getId() + " " + visiteur.getPrenom() + " " + visiteur.getNom());
+    }
+
+    public boolean visiteurExiste()
+    {
+        recupSerializeVisiteur(contexte);
+        //Log.d("AH", visiteur.getId());
+        Log.d("Controleur-testVisiteur ", "******" + visiteur.getId() + " " + visiteur.getPrenom() + " " + visiteur.getNom());
+        if(visiteur.getId() != null)
+        {
+            Log.d("TEST VRAI", "********** VRAI PUTAIN");
+            return true;
+        }
+            Log.d("TEST FAUX", "********** FAUX SA MERE");
+        return false;
+    }
     public void setVisiteur(Visiteur visiteur){
         Controle.visiteur = visiteur;
     }

@@ -12,16 +12,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-
-import java.util.ArrayList;
-import java.util.Hashtable;
-import java.util.List;
-
 import fr.cned.emdsgil.suividevosfrais.controleur.Controle;
 
-import static fr.cned.emdsgil.suividevosfrais.controleur.Controle.PREF_ID;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -32,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     public MainActivity() {
         this.accesDistant = new AccesDistant();
         this.context = MainActivity.this;
+        this.controle = controle.getInstance(this);
     }
 
     @Override
@@ -50,26 +44,19 @@ public class MainActivity extends AppCompatActivity {
             @SuppressLint("WrongConstant")
             public void onClick(View v) {
                 String login = ((EditText)findViewById(R.id.txtEditLogin)).getText().toString();
-                String mdp = ((EditText)findViewById(R.id.txtEditMdp)).getText().toString();
-                List loginmdp = new ArrayList();
-                loginmdp.add(login);
-                loginmdp.add(mdp);
-                JSONArray donnees = new JSONArray(loginmdp);
-                controle.getInstance(MainActivity.this).authentification(donnees);
+                String password = ((EditText)findViewById(R.id.txtEditMdp)).getText().toString();
 
+                controle.authentification(login, password);
+                controle.visiteurExiste();
 
-
-                /*
-                if(visiteur != null)
+                if(controle.visiteurExiste())
                 {
                     accesMenuPrincipal();
                 }
                 else
                 {
-                    Toast.makeText(context, "Mot de passe ou identifiant erroné(s)", 5).show();
+                    Toast.makeText(context, "Mot de passe ou identifiant erroné(s)", Toast.LENGTH_LONG).show();
                 }
-                */
-
             }
         });
     }
