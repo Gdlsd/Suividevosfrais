@@ -61,10 +61,6 @@ public class Controle {
         JSONArray donnees = new JSONArray(loginmdp);
 
         accesDistant.envoi("authentification", donnees);
-
-        Log.d("ID DU VISITEUR 2", "*************" + Global.idVisiteur);
-
-
     }
 
     public void synchroFrais(Context contexte)
@@ -85,43 +81,7 @@ public class Controle {
         fraisMoisJSONArray.put(Global.idVisiteur);
         fraisMoisJSONArray.put(fraisMoisJSON);
 
-
-        Log.d("FRAIS MOIS JSO", "***********" + fraisMoisJSONArray);
-
         //Transfert des données au serveur
         accesDistant.envoi("synchronisation", fraisMoisJSONArray);
-
     }
-
-    /*public void creerVisiteur(String id, String nom, String prenom, Context contexte){
-        Log.d("Controleur-CREER VISITEUR ", "******" + visiteur.getId() + " " + visiteur.getPrenom() + " " + visiteur.getNom());
-        //Serializer.serialize(Global.listFraisMois, context);
-        Serializer.serialize(visiteur, contexte, Global.filenameFrais);
-        accesDistant.envoi("recupFrais", visiteur.convertToJSONArray());
-    }
-
-    private static void recupSerializeVisiteur(Context contexte)
-    {
-        visiteur = (Visiteur)Serializer.deSerialize(contexte, Global.filenameFrais);
-        Log.d("Visiteur DESERIALIZE ", "******" + visiteur.getId() + " " + visiteur.getPrenom() + " " + visiteur.getNom());
-    }
-
-
-    public boolean visiteurExiste()
-    {
-        recupSerializeVisiteur(contexte);
-        //Log.d("AH", visiteur.getId());
-        Log.d("Controleur-testVisiteur ", "******" + visiteur.getId() + " " + visiteur.getPrenom() + " " + visiteur.getNom());
-        if(visiteur.getId() != null)
-        {
-            Log.d("TEST VRAI", "********** VRAI");
-            return true;
-        }
-            Log.d("TEST FAUX", "********** FAUX");
-        return false;
-    }
-
-    public void setVisiteur(Visiteur visiteur){
-        Controle.visiteur = visiteur;
-    }
-*/}
+}

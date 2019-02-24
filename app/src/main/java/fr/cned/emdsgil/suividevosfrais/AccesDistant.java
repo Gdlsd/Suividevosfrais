@@ -1,7 +1,5 @@
 package fr.cned.emdsgil.suividevosfrais;
 
-import android.content.Context;
-import android.content.Intent;
 import android.util.Log;
 
 import org.json.JSONArray;
@@ -12,12 +10,11 @@ import fr.cned.emdsgil.suividevosfrais.controleur.Controle;
 import fr.cned.emdsgil.suividevosfrais.outils.AccesHTTP;
 import fr.cned.emdsgil.suividevosfrais.outils.AsyncResponse;
 
-import static android.support.v4.content.ContextCompat.startActivity;
 
 public class AccesDistant implements AsyncResponse {
 
     //constante
-    private static final String SERVERADDR = "http://****/suividevosfrais/serveursuivifrais.php";
+    private static final String SERVERADDR = "http://192.168.1.18/suividevosfrais/serveursuivifrais.php";
     private Controle controle;
 
 
@@ -50,46 +47,19 @@ public class AccesDistant implements AsyncResponse {
 
                     Visiteur visiteur = new Visiteur(id, nom, prenom);
                     Global.idVisiteur = visiteur.getId();
-                    Log.d("ID DU VISITEUR", "*****" + Global.idVisiteur);
-                    //controle.setVisiteur(visiteur);
-
-                    if (id != null) {
-                        Log.d("authentification OK", "******************* C'est OK pour " + message[1]);
-                        //controle.setVisiteur(visiteur);
-                    }
-
                 } catch (JSONException e) {
                     Log.d("erreur", "conversion JSON impossible" + e.toString());
                 }
             } else {
                 if (message[0].equals("synchronisation")) {
                     Log.d("synchronisation", "***************" + message[1]);
+                    /////////////////////////////////////////////////////
+                    // Ajout de code pour un éventuel retour de données//
+                    /////////////////////////////////////////////////////
                     try {
                         JSONObject info = new JSONObject(message[1]);
-                        String id = info.getString("id");
-                        String nom = info.getString("nom");
-                        String prenom = info.getString("prenom");
-
-                        Visiteur visiteur = new Visiteur(id, nom, prenom);
-                        Global.idVisiteur = visiteur.getId();
-                        Log.d("ID DU VISITEUR", "*****" + Global.idVisiteur);
-                        //controle.setVisiteur(visiteur);
-
-                        if (id != null) {
-                            Log.d("authentification OK", "******************* C'est OK pour " + message[1]);
-                            //controle.setVisiteur(visiteur);
-                        }
-
                     } catch (JSONException e) {
                         Log.d("erreur", "conversion JSON impossible" + e.toString());
-                    }
-                } else {
-                    if (message[0].equals("reception")) {
-                        Log.d("reception", "***************" + message[1]);
-                    } else {
-                        if (message[0].equals("Erreur !")) {
-                            Log.d("Erreur !", "***************" + message[1]);
-                        }
                     }
                 }
             }
