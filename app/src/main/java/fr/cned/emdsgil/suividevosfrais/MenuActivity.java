@@ -9,6 +9,7 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import java.util.Hashtable;
 
@@ -116,6 +117,7 @@ public class MenuActivity extends AppCompatActivity {
                 // envoi les informations sérialisées vers le serveur
                 // en construction
             controle.synchroFrais(MenuActivity.this);
+                Toast.makeText(MenuActivity.this, "Vos frais ont été synchronisés.", Toast.LENGTH_SHORT).show();
 
             }
         });
