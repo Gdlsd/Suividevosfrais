@@ -3,7 +3,6 @@ package fr.cned.emdsgil.suividevosfrais;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
@@ -40,7 +39,6 @@ public class MenuActivity extends AppCompatActivity {
         cmdMenu_clic(((ImageButton) findViewById(R.id.cmdHfRecap)), HfRecapActivity.class);
         cmdDeconnexion_clic();
         cmdTransfert_clic();
-        Log.d("listFraisMois", "*************" + Global.listFraisMois.elements());
     }
 
     @Override

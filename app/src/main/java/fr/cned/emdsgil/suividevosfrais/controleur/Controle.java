@@ -11,18 +11,11 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Hashtable;
-import java.util.Iterator;
 import java.util.List;
 
 import fr.cned.emdsgil.suividevosfrais.AccesDistant;
-
-import fr.cned.emdsgil.suividevosfrais.FraisMois;
 import fr.cned.emdsgil.suividevosfrais.Global;
-
-import fr.cned.emdsgil.suividevosfrais.MainActivity;
 import fr.cned.emdsgil.suividevosfrais.Serializer;
-import fr.cned.emdsgil.suividevosfrais.Visiteur;
 import fr.cned.emdsgil.suividevosfrais.outils.JSONconvert;
 
 
@@ -30,8 +23,6 @@ public class Controle {
 
     private static Controle instance = null;
     private static Context contexte;
-    private static Visiteur visiteur;
-    private FraisMois fraisMois;
     private static AccesDistant accesDistant;
 
 
@@ -70,18 +61,19 @@ public class Controle {
         //Récupération des frais serialisés dans un tableau de type String
         String fraisMois = gson.toJson(Serializer.deSerialize(contexte, Global.filenameFrais));
 
-        //Ajout de l'id du visiteur en cours
-        Log.d("FRAIS MOIS VISITEUR", "***********" + fraisMois);
-
         //Conversion des frais au format JSON
         JSONObject fraisMoisJSON = conversion.stringToJSONObject(fraisMois);
 
         //Création d'un JSONArray à partir des données JSON pour pouvoir transférer les données
+        //Ajout de l'id du visiteur en cours
         JSONArray fraisMoisJSONArray = new JSONArray();
         fraisMoisJSONArray.put(Global.idVisiteur);
         fraisMoisJSONArray.put(fraisMoisJSON);
 
+        Toast.makeText(contexte, "Vos frais ont été synchronisés.", Toast.LENGTH_SHORT).show();
+
         //Transfert des données au serveur
         accesDistant.envoi("synchronisation", fraisMoisJSONArray);
+
     }
 }

@@ -12,6 +12,8 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import java.text.Normalizer;
+
 public class HfActivity extends AppCompatActivity {
 
 	@Override
@@ -78,6 +80,11 @@ public class HfActivity extends AppCompatActivity {
 		Integer jour = ((DatePicker)findViewById(R.id.datHf)).getDayOfMonth() ;
 		Float montant = Float.valueOf((((EditText)findViewById(R.id.txtHf)).getText().toString()));
 		String motif = ((EditText)findViewById(R.id.txtHfMotif)).getText().toString() ;
+
+		//Remplacement des caractères accentués par des caractères non accentués
+		motif = Normalizer.normalize(motif, Normalizer.Form.NFD);
+		motif = motif.replaceAll("[^\\p{ASCII}]", "");
+
 		// enregistrement dans la liste
 		Integer key = annee*100+mois ;
 		if (!Global.listFraisMois.containsKey(key)) {

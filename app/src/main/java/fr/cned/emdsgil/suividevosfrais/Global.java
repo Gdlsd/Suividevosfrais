@@ -20,7 +20,6 @@ public abstract class Global {
 	*/
     // fichier contenant les informations sérialisées
     public static final String filenameFrais = "save.fic";
-    public static final String filenameInfoVis = "infoVis.fic";
     public static String idVisiteur;
 
     /**
