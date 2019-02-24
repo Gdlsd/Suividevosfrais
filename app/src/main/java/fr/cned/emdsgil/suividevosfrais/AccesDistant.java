@@ -14,10 +14,9 @@ import fr.cned.emdsgil.suividevosfrais.outils.AsyncResponse;
 public class AccesDistant implements AsyncResponse {
 
     //constante
-    private static final String SERVERADDR = "http://192.168.1.18/suividevosfrais/serveursuivifrais.php";
-
-
+    private static final String SERVERADDR = "http://*******/suividevosfrais/serveursuivifrais.php";
     private Controle controle;
+
 
 
     public AccesDistant() {
@@ -48,21 +47,17 @@ public class AccesDistant implements AsyncResponse {
 
                     Visiteur visiteur = new Visiteur(id, nom, prenom);
                     Global.idVisiteur = visiteur.getId();
-                    if (id != null) {
-                        Log.d("authentification OK", "******************* C'est OK pour " + message[1]);
-                        //controle.setVisiteur(visiteur);
-                    }
                 } catch (JSONException e) {
                     Log.d("erreur", "conversion JSON impossible" + e.toString());
                 }
             } else {
                 if (message[0].equals("synchronisation")) {
                     Log.d("synchronisation", "***************" + message[1]);
+                    /////////////////////////////////////////////////////
+                    // Ajout de code pour un éventuel retour de données//
+                    /////////////////////////////////////////////////////
                     try {
                         JSONObject info = new JSONObject(message[1]);
-                        ////////////////////////////////////////////////
-                        // Code éventuel pour gérer un retour serveur //
-                        ////////////////////////////////////////////////
                     } catch (JSONException e) {
                         Log.d("erreur", "conversion JSON impossible" + e.toString());
                     }
