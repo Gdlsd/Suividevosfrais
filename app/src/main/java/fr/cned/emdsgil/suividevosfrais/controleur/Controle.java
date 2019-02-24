@@ -58,11 +58,10 @@ public class Controle {
         if(visiteur != null)
         {
             creerVisiteur(visiteur.getId(), visiteur.getNom(), visiteur.getPrenom(), contexte);
-
         }
         else
         {
-            Toast.makeText(contexte, "Mot de passe ou identifiant erroné(s)", Toast.LENGTH_LONG).show();
+            Toast.makeText(contexte, "Mot de passe ou identifiant erroné(s)", Toast.LENGTH_SHORT).show();
             Log.d("Controleur-AUTH ", "******PROBLEME" );
         }
     }

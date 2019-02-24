@@ -1,4 +1,5 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -153,16 +154,36 @@
         android:orientation="horizontal"
         android:baselineAligned="false">
 
-        <ImageButton
-            android:id="@+id/cmdTransfert"
+        <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_gravity="center"
             android:layout_weight="0.25"
-            android:background="@null"
-            android:contentDescription="@string/icone_transfert"
-            android:scaleType="fitCenter"
-            android:src="@drawable/transfert" />
+            android:orientation="vertical">
+
+            <ImageButton
+                android:id="@+id/cmdDeconnexion"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:srcCompat="@android:drawable/ic_lock_power_off" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.25"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:id="@+id/cmdTransfert"
+                android:layout_width="187dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_weight="0.25"
+                android:background="@null"
+                android:contentDescription="@string/icone_transfert"
+                android:scaleType="fitCenter"
+                android:src="@drawable/transfert" />
+        </LinearLayout>
 
     </LinearLayout>
 

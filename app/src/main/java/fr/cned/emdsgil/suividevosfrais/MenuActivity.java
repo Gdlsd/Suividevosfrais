@@ -19,7 +19,7 @@ public class MenuActivity extends AppCompatActivity {
         setContentView(R.layout.activity_menu);
         setTitle("GSB : Suivi des frais");
         // récupération des informations sérialisées
-        recupSerialize();
+        //recupSerialize();
         // chargement des méthodes événementielles
         cmdMenu_clic(((ImageButton) findViewById(R.id.cmdKm)), KmActivity.class);
         cmdMenu_clic(((ImageButton) findViewById(R.id.cmdNuitee)), NuiActivity.class);
@@ -27,6 +27,7 @@ public class MenuActivity extends AppCompatActivity {
         cmdMenu_clic(((ImageButton) findViewById(R.id.cmdEtape)), EtpActivity.class);
         cmdMenu_clic(((ImageButton) findViewById(R.id.cmdHf)), HfActivity.class);
         cmdMenu_clic(((ImageButton) findViewById(R.id.cmdHfRecap)), HfRecapActivity.class);
+        cmdDeconnexion_clic();
         cmdTransfert_clic();
     }
 
@@ -80,6 +81,20 @@ public class MenuActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Clic sur le bouton Deconnexion
+     */
+    private void cmdDeconnexion_clic() {
+        findViewById(R.id.cmdDeconnexion).setOnClickListener(new Button.OnClickListener() {
+            public void onClick(View v) {
+                // envoi les informations sérialisées vers le serveur
+                // en construction
+                Intent intent = new Intent(MenuActivity.this, MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+            }
+        });
+    }
     /**
      * Cas particulier du bouton pour le transfert d'informations vers le serveur
      */

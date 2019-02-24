@@ -65,8 +65,9 @@ public class MainActivity extends AppCompatActivity {
      * Envoie l'utilisateur sur le menu principal
      */
     public void accesMenuPrincipal(){
-        Intent menuActivity = new Intent(MainActivity.this, MenuActivity.class);
-        startActivity(menuActivity);
+        Intent intent = new Intent(MainActivity.this, MenuActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
     }
 
 }
