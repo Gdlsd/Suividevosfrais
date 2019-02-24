@@ -164,7 +164,8 @@
                 android:id="@+id/cmdDeconnexion"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:srcCompat="@android:drawable/ic_lock_power_off" />
+                android:background="@null"
+                app:srcCompat="@drawable/logout" />
         </LinearLayout>
 
         <LinearLayout

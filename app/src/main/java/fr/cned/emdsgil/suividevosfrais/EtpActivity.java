@@ -90,7 +90,7 @@ public class EtpActivity extends AppCompatActivity {
     private void cmdValider_clic(){
         findViewById(R.id.cmdEtpValider).setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
-                Serializer.serialize(Global.listFraisMois, EtpActivity.this);
+                Serializer.serialize(Global.listFraisMois, EtpActivity.this, Global.filenameFrais);
                 retourActivityPrincipale();
             }
         });

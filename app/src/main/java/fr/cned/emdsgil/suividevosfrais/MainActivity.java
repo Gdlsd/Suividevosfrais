@@ -47,9 +47,9 @@ public class MainActivity extends AppCompatActivity {
                 String password = ((EditText)findViewById(R.id.txtEditMdp)).getText().toString();
 
                 controle.authentification(login, password);
-                controle.visiteurExiste();
 
-                if(controle.visiteurExiste())
+                
+                if(Global.idVisiteur != null)
                 {
                     accesMenuPrincipal();
                 }

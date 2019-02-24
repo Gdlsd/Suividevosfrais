@@ -90,7 +90,7 @@ public class RepActivity extends AppCompatActivity {
     private void cmdValider_clic(){
         findViewById(R.id.cmdRepValider).setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
-                Serializer.serialize(Global.listFraisMois, RepActivity.this);
+                Serializer.serialize(Global.listFraisMois, RepActivity.this, Global.filenameFrais);
                 retourActivityPrincipale();
             }
         });

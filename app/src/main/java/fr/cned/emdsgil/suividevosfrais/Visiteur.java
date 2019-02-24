@@ -29,6 +29,9 @@ public class Visiteur implements Serializable {
 
     public void setPrenom(String prenom) { this.prenom = prenom; }
 
+    public void destroy(){
+        System.exit(0);
+    }
     /**
      * Conversion du visiteur au format JSONArray
      */

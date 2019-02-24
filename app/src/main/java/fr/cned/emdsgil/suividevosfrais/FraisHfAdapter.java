@@ -98,7 +98,7 @@ class FraisHfAdapter extends BaseAdapter {
 			public void onClick(View v) {
 				int index = (int)v.getTag();
 			    lesFrais.remove(lesFrais.get(index));
-				Serializer.serialize(Global.listFraisMois, context);
+				Serializer.serialize(Global.listFraisMois, context, Global.filenameFrais);
                 //Rafraichissement de la liste visuelle
                 notifyDataSetChanged();
 			}

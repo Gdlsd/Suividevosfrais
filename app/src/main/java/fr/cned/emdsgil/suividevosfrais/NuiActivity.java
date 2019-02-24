@@ -90,7 +90,7 @@ public class NuiActivity extends AppCompatActivity {
     private void cmdValider_clic(){
         findViewById(R.id.cmdNuiValider).setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
-                Serializer.serialize(Global.listFraisMois, NuiActivity.this);
+                Serializer.serialize(Global.listFraisMois, NuiActivity.this, Global.filenameFrais);
                 retourActivityPrincipale();
             }
         });

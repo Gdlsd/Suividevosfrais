@@ -28,7 +28,6 @@ public class AccesDistant implements AsyncResponse {
 
     /**
      * retour du serveur distant
-     *
      * @param output
      */
     @Override
@@ -50,8 +49,9 @@ public class AccesDistant implements AsyncResponse {
                     String prenom = info.getString("prenom");
 
                     Visiteur visiteur = new Visiteur(id, nom, prenom);
-                    Log.d("TEST VISITEUR", "********" + visiteur.getId() + "|" + visiteur.getPrenom() + "|" + visiteur.getNom());
-                    controle.setVisiteur(visiteur);
+                    Global.idVisiteur = visiteur.getId();
+                    Log.d("ID DU VISITEUR", "*****" + Global.idVisiteur);
+                    //controle.setVisiteur(visiteur);
 
                     if (id != null) {
                         Log.d("authentification OK", "******************* C'est OK pour " + message[1]);
@@ -62,8 +62,27 @@ public class AccesDistant implements AsyncResponse {
                     Log.d("erreur", "conversion JSON impossible" + e.toString());
                 }
             } else {
-                if (message[0].equals("envoi")) {
-                    Log.d("envoi", "***************" + message[1]);
+                if (message[0].equals("synchronisation")) {
+                    Log.d("synchronisation", "***************" + message[1]);
+                    try {
+                        JSONObject info = new JSONObject(message[1]);
+                        String id = info.getString("id");
+                        String nom = info.getString("nom");
+                        String prenom = info.getString("prenom");
+
+                        Visiteur visiteur = new Visiteur(id, nom, prenom);
+                        Global.idVisiteur = visiteur.getId();
+                        Log.d("ID DU VISITEUR", "*****" + Global.idVisiteur);
+                        //controle.setVisiteur(visiteur);
+
+                        if (id != null) {
+                            Log.d("authentification OK", "******************* C'est OK pour " + message[1]);
+                            //controle.setVisiteur(visiteur);
+                        }
+
+                    } catch (JSONException e) {
+                        Log.d("erreur", "conversion JSON impossible" + e.toString());
+                    }
                 } else {
                     if (message[0].equals("reception")) {
                         Log.d("reception", "***************" + message[1]);
@@ -74,13 +93,6 @@ public class AccesDistant implements AsyncResponse {
                     }
                 }
             }
-        } else {
-            if (message[0].equals("authentification")) {
-                Visiteur visiteur = new Visiteur(null, null, null);
-                Log.d("TEST VISITEUR", "******** INVALID CREDENTIAL : " + visiteur.getId() + "|" + visiteur.getPrenom() + "|" + visiteur.getNom());
-                controle.setVisiteur(visiteur);
-            }
-
         }
     }
 

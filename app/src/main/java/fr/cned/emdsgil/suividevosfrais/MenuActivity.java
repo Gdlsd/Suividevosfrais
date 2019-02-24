@@ -3,6 +3,7 @@ package fr.cned.emdsgil.suividevosfrais;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
@@ -11,7 +12,17 @@ import android.widget.ImageButton;
 
 import java.util.Hashtable;
 
+import fr.cned.emdsgil.suividevosfrais.controleur.Controle;
+
 public class MenuActivity extends AppCompatActivity {
+
+    private Controle controle;
+
+
+    public MenuActivity()
+    {
+        this.controle = controle.getInstance(this);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,7 +30,7 @@ public class MenuActivity extends AppCompatActivity {
         setContentView(R.layout.activity_menu);
         setTitle("GSB : Suivi des frais");
         // récupération des informations sérialisées
-        //recupSerialize();
+        recupSerialize();
         // chargement des méthodes événementielles
         cmdMenu_clic(((ImageButton) findViewById(R.id.cmdKm)), KmActivity.class);
         cmdMenu_clic(((ImageButton) findViewById(R.id.cmdNuitee)), NuiActivity.class);
@@ -29,6 +40,7 @@ public class MenuActivity extends AppCompatActivity {
         cmdMenu_clic(((ImageButton) findViewById(R.id.cmdHfRecap)), HfRecapActivity.class);
         cmdDeconnexion_clic();
         cmdTransfert_clic();
+        Log.d("listFraisMois", "*************" + Global.listFraisMois.elements());
     }
 
     @Override
@@ -49,7 +61,7 @@ public class MenuActivity extends AppCompatActivity {
          * on cast chaque valeur dans le type attendu.
          * Seulement ensuite on affecte cet Hastable à Global.listFraisMois.
         */
-        Hashtable<?, ?> monHash = (Hashtable<?, ?>) Serializer.deSerialize(MenuActivity.this);
+        Hashtable<?, ?> monHash = (Hashtable<?, ?>) Serializer.deSerialize(MenuActivity.this, Global.filenameFrais);
         if (monHash != null) {
             Hashtable<Integer, FraisMois> monHashCast = new Hashtable<>();
             for (Hashtable.Entry<?, ?> entry : monHash.entrySet()) {
@@ -87,8 +99,8 @@ public class MenuActivity extends AppCompatActivity {
     private void cmdDeconnexion_clic() {
         findViewById(R.id.cmdDeconnexion).setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
-                // envoi les informations sérialisées vers le serveur
-                // en construction
+                // Déconnexion de la session
+                Global.idVisiteur = null;
                 Intent intent = new Intent(MenuActivity.this, MainActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
@@ -103,6 +115,8 @@ public class MenuActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // envoi les informations sérialisées vers le serveur
                 // en construction
+            controle.synchroFrais(MenuActivity.this);
+
             }
         });
     }

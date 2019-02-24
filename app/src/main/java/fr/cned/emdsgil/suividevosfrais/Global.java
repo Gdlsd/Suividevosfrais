@@ -12,7 +12,6 @@ public abstract class Global {
 
     // tableau d'informations mémorisées
     public static Hashtable<Integer, FraisMois> listFraisMois = new Hashtable<>();
-    public static Hashtable<Integer, Visiteur> unVisiteur = new Hashtable<>();
 
 
     /* Retrait du type de l'Hashtable (Optimisation Android Studio)
@@ -20,7 +19,9 @@ public abstract class Global {
 	 * public static Hashtable<Integer, FraisMois> listFraisMois = new Hashtable<Integer, FraisMois>();
 	*/
     // fichier contenant les informations sérialisées
-    public static final String filename = "save.fic";
+    public static final String filenameFrais = "save.fic";
+    public static final String filenameInfoVis = "infoVis.fic";
+    public static String idVisiteur;
 
     /**
      * Modification de l'affichage de la date (juste le mois et l'année, sans le jour)
