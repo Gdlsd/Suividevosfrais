@@ -1,6 +1,7 @@
 package fr.cned.emdsgil.suividevosfrais.controleur;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 
 import android.content.Context;
 
@@ -51,6 +52,17 @@ public class Controle {
         loginmdp.add(password);
         JSONArray donnees = new JSONArray(loginmdp);
         accesDistant.envoi("authentification", donnees);
+    }
+
+    /**
+     * Récupération des frais du mois en cour pour mettre à jour les frais de l'application
+     */
+    public void recupFrais(String idVisiteur)
+    {
+        //Demande de récupération des frais de l'utilisateur
+        JSONArray idVisiteurJSON = new JSONArray();
+        idVisiteurJSON.put(Global.idVisiteur);
+        accesDistant.envoi("recupFrais", idVisiteurJSON);
     }
 
     public void synchroFrais(Context contexte)

@@ -1,6 +1,5 @@
 package fr.cned.emdsgil.suividevosfrais;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
@@ -10,10 +9,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.ArrayList;
+import java.util.Calendar;
 
 import fr.cned.emdsgil.suividevosfrais.controleur.Controle;
 import fr.cned.emdsgil.suividevosfrais.outils.AccesHTTP;
@@ -35,6 +31,7 @@ public class AccesDistant implements AsyncResponse {
 
     /**
      * retour du serveur distant
+     *
      * @param output
      */
     @Override
@@ -49,15 +46,12 @@ public class AccesDistant implements AsyncResponse {
             if (message[0].equals("authentification")) {
                 Log.d("authentification", "***************" + message[1]);
                 try {
-                    if(message[1].equals("\"erreurLogin\""))
-                    {
+                    if (message[1].equals("\"erreurLogin\"")) {
                         AlertDialogManager alertDialogManager = new AlertDialogManager();
                         alertDialogManager.showAlertDialog(contexte,
                                 "Connexion impossible",
-                                "Paramètre(s) de connexion incorrect(s)" );
-                    }
-                    else
-                    {
+                                "Paramètre(s) de connexion incorrect(s)");
+                    } else {
                         JSONObject info = new JSONObject(message[1]);
                         String id = info.getString("id");
                         String nom = info.getString("nom");
@@ -65,6 +59,9 @@ public class AccesDistant implements AsyncResponse {
 
                         Visiteur visiteur = new Visiteur(id, nom, prenom);
                         Global.idVisiteur = visiteur.getId();
+
+                        controle.recupFrais(Global.idVisiteur);
+
                         this.contexte.startActivity(new Intent(this.contexte, MenuActivity.class));
 
                         Toast.makeText(contexte, "Connexion réussie", Toast.LENGTH_SHORT).show();
@@ -72,22 +69,28 @@ public class AccesDistant implements AsyncResponse {
                 } catch (JSONException e) {
                     Log.d("erreur", "conversion JSON impossible" + e.toString());
                 }
-            } else {
-                if (message[0].equals("synchronisation")) {
+            }
+            else if (message[0].equals("synchronisation")) {
                     Log.d("synchronisation", "***************" + message[1]);
                     try {
-                    if(message[1].length() > 0)
-                    {
+                        if (message[1].length() > 0) {
+                            //Récupération et enregistrement des frais sauvegardés sur la base distante
+                            JSONObject recupFrais = new JSONObject(message[1]);
+                        }
+                    } catch (JSONException e) {
+                        Log.d("erreur", "conversion JSON impossible" + e.toString());
+                    }
+            }
+            else if(message[0].equals("recupFrais"))
+            {
+                Log.d("recupFrais", "***************" + message[1]);
+                try {
+                    if (!message[1].equals("\"aucunFrais\"")) {
                         //Récupération et enregistrement des frais sauvegardés sur la base distante
                         JSONObject recupFrais = new JSONObject(message[1]);
-                        Log.d("LES FRAIS JSON RETOUR SERV", "*******" + recupFrais);
-
-//                        //Effacer les données sauvegardées pour les réécrire.
-//                        Global.listFraisMois.clear();
-//                        Serializer.serialize(Global.listFraisMois, contexte, Global.filenameFrais);
 
                         //Récupération des données
-                        JSONObject lesFrais = recupFrais.getJSONObject("");
+                        JSONObject lesFrais = recupFrais.getJSONObject("fraisBdd");
                         Integer annee   = lesFrais.getInt("annee");
                         Integer mois    = lesFrais.getInt("mois");
                         Integer etape   = lesFrais.getInt("etape");
@@ -96,11 +99,19 @@ public class AccesDistant implements AsyncResponse {
                         Integer repas   = lesFrais.getInt("repas");
                         JSONArray lesFraisHf = lesFrais.getJSONArray("lesFraisHf");
 
-                        FraisMois frais = new FraisMois(annee, mois);
-                        frais.setEtape(etape);
-                        frais.setKm(km);
-                        frais.setNuitee(nuitee);
-                        frais.setRepas(repas);
+                        //Suppression des frais existants
+                        Global.listFraisMois.clear();
+
+                        Integer key = annee*100+mois ;
+
+                        if (!Global.listFraisMois.containsKey(key)) {
+                            // creation du mois et de l'annee s'ils n'existent pas déjà
+                            Global.listFraisMois.put(key, new FraisMois(annee, mois)) ;
+                        }
+                        Global.listFraisMois.get(key).setEtape(etape);
+                        Global.listFraisMois.get(key).setKm(km);
+                        Global.listFraisMois.get(key).setNuitee(nuitee);
+                        Global.listFraisMois.get(key).setRepas(repas);
 
                         for(int i = 0; i < lesFraisHf.length(); i++)
                         {
@@ -113,41 +124,36 @@ public class AccesDistant implements AsyncResponse {
                             Float montantFraisHf = Float.parseFloat(unFrais.getString("montant"));
                             String motifFraisHf = unFrais.getString("libelle");
 
-                            frais.addFraisHf(montantFraisHf, motifFraisHf, jourFraisHf);
+//                            if (!Global.listFraisMois.containsKey(key)) {
+//                                // creation du mois et de l'annee s'ils n'existent pas déjà
+//                                Global.listFraisMois.put(key, new FraisMois(annee, mois)) ;
+//                            }
+                            Global.listFraisMois.get(key).addFraisHf(montantFraisHf, motifFraisHf, jourFraisHf) ;
                         }
 
-                        //Serialisation du frais à la place du frais existant
-                        Serializer.serialize(frais, contexte, Global.filenameFrais);
-//                        Log.d("TEST", "************"+message[1]);
-//                        for(int i = 0; i < lesFraisHf.length(); i++)
-//                        {
-//                            JSONObject unFrais = lesFraisHf.getJSONObject(i);
-//                            String date = unFrais.getString("date");
-//                            String[] dateSplit = date.split("-");
-//                            Integer annee = Integer.parseInt(dateSplit[0]);
-//                            Integer mois = Integer.parseInt(dateSplit[1]);
-//                            Integer jour = Integer.parseInt(dateSplit[2]);
-//                            Float montant = Float.parseFloat(unFrais.getString("montant"));
-//                            String motif = unFrais.getString("libelle");
-//                            Integer key = Integer.parseInt(unFrais.getString("mois"));
-//
-//
-//                            if (!Global.listFraisMois.containsKey(key)) {
-//                            // creation du mois et de l'annee s'ils n'existent pas déjà
-//                            Global.listFraisMois.put(key, new FraisMois(annee, mois)) ;
-//                            }
-//                            Global.listFraisMois.get(key).addFraisHf(montant, motif, jour) ;
-//                        }
-//                        Serializer.serialize(Global.listFraisMois, contexte, Global.filenameFrais);
+                        //Serialisation des frais à la place des frais existants
+                        Serializer.serialize(Global.listFraisMois, contexte, Global.filenameFrais);
                     }
-                    } catch (JSONException e) {
-                    Log.d("erreur", "conversion JSON impossible" + e.toString());
-                    }
+                    else
+                    {
+                        //Si aucune fiche, initialisation d'une fiche locale
+                        Global.listFraisMois.clear();
 
-                }
+                        //Reformation de la clé key en récupérant annee et mois
+                        Calendar calendar = Calendar.getInstance();
+                        int annee = calendar.get(Calendar.YEAR);
+                        int mois = calendar.get(Calendar.MONTH);
+
+                        int key = annee*100+mois;
+                        Global.listFraisMois.put(key, new FraisMois(annee, mois));
+                        Serializer.serialize(Global.listFraisMois, contexte, Global.filenameFrais);
+                    }
+                } catch (JSONException e) {
+                    Log.d("erreur", "conversion JSON impossible" + e.toString());
                 }
             }
         }
+    }
 
 
     public void envoi(String operation, JSONArray lesDonneesJSON) {
