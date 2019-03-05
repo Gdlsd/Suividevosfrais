@@ -19,7 +19,7 @@ public abstract class Global {
 	 * public static Hashtable<Integer, FraisMois> listFraisMois = new Hashtable<Integer, FraisMois>();
 	*/
     // fichier contenant les informations sérialisées
-    public static final String filenameFrais = "save.fic";
+    public static final String filenameFrais = "";
     public static String idVisiteur;
 
     /**

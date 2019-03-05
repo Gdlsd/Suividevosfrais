@@ -38,7 +38,7 @@ public class Controle {
             Controle.instance = new Controle();
 
             //Param accès BDD distante
-            accesDistant = new AccesDistant();
+            accesDistant = new AccesDistant(contexte);
         }
 
         return Controle.instance;
@@ -50,7 +50,6 @@ public class Controle {
         loginmdp.add(login);
         loginmdp.add(password);
         JSONArray donnees = new JSONArray(loginmdp);
-
         accesDistant.envoi("authentification", donnees);
     }
 
@@ -70,10 +69,10 @@ public class Controle {
         fraisMoisJSONArray.put(Global.idVisiteur);
         fraisMoisJSONArray.put(fraisMoisJSON);
 
+        Log.d("JSON ARRAY DE DONNEES", "********" + fraisMoisJSONArray);
         Toast.makeText(contexte, "Vos frais ont été synchronisés.", Toast.LENGTH_SHORT).show();
 
         //Transfert des données au serveur
         accesDistant.envoi("synchronisation", fraisMoisJSONArray);
-
     }
 }

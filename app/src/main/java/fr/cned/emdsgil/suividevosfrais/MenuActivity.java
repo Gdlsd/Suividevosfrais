@@ -114,7 +114,6 @@ public class MenuActivity extends AppCompatActivity {
                 // envoi les informations sérialisées vers le serveur
                 // en construction
             controle.synchroFrais(MenuActivity.this);
-
             }
         });
     }

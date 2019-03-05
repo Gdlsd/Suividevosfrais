@@ -21,8 +21,8 @@ public class MainActivity extends AppCompatActivity {
     private Controle controle;
 
     public MainActivity() {
-        this.accesDistant = new AccesDistant();
-        this.context = MainActivity.this;
+        this.accesDistant = new AccesDistant(this);
+        this.context = this;
         this.controle = controle.getInstance(this);
     }
 
@@ -45,16 +45,6 @@ public class MainActivity extends AppCompatActivity {
                 String password = ((EditText)findViewById(R.id.txtEditMdp)).getText().toString();
 
                 controle.authentification(login, password);
-
-                
-                if(Global.idVisiteur != null)
-                {
-                    accesMenuPrincipal();
-                }
-                else
-                {
-                    Toast.makeText(context, "Mot de passe ou identifiant erroné(s)", Toast.LENGTH_LONG).show();
-                }
             }
         });
     }
