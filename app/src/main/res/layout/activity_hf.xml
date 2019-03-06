@@ -31,7 +31,8 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:contentDescription="@string/icon_frais_hf"
-                android:src="@drawable/frais_hf" />
+                android:src="@drawable/frais_hf"
+                tools:srcCompat="@drawable/frais_hf_new" />
         </LinearLayout>
 
         <LinearLayout

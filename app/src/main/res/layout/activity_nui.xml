@@ -28,12 +28,13 @@
 
             <ImageView
                 android:id="@+id/imgNuiReturn"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_gravity="end"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_gravity="center"
                 android:layout_weight="1"
                 android:contentDescription="@string/icone_frais_nuitee"
-                android:src="@drawable/frais_nuitee" />
+                android:src="@drawable/frais_nuitee"
+                tools:srcCompat="@drawable/frais_nuitee_new" />
         </LinearLayout>
 
         <LinearLayout

@@ -1,4 +1,5 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -28,12 +29,15 @@
 
             <ImageView
                 android:id="@+id/imgRepReturn"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_gravity="end"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_gravity="center"
                 android:layout_weight="1"
                 android:contentDescription="@string/icone_frais_repas"
-                android:src="@drawable/frais_repas" />
+                android:scaleType="fitCenter"
+                android:src="@drawable/frais_repas"
+                app:srcCompat="@drawable/frais_repas_new"
+                tools:srcCompat="@drawable/frais_repas_new" />
         </LinearLayout>
 
         <LinearLayout

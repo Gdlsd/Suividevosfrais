@@ -27,12 +27,13 @@
 
             <ImageView
                 android:id="@+id/imgHfRecapReturn"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:contentDescription="@string/icon_recap_frais_hf"
-                android:src="@drawable/frais_hf_recap" />
+                android:src="@drawable/frais_hf_recap"
+                tools:srcCompat="@drawable/frais_hf_recap_new" />
         </LinearLayout>
 
         <LinearLayout
