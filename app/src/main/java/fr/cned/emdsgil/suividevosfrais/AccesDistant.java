@@ -19,7 +19,7 @@ import fr.cned.emdsgil.suividevosfrais.outils.AsyncResponse;
 public class AccesDistant implements AsyncResponse {
 
     //constante
-    private static final String SERVERADDR = "http://192.168.1.23/suividevosfrais/serveursuivifrais.php";
+    private static final String SERVERADDR = "http://projets.g-dalessandro.com/suividevosfrais/serveursuivifrais.php";
     private Controle controle;
     private Context contexte;
 
@@ -72,14 +72,10 @@ public class AccesDistant implements AsyncResponse {
             }
             else if (message[0].equals("synchronisation")) {
                     Log.d("synchronisation", "***************" + message[1]);
-                    try {
-                        if (message[1].length() > 0) {
-                            //Récupération et enregistrement des frais sauvegardés sur la base distante
-                            JSONObject recupFrais = new JSONObject(message[1]);
-                        }
-                    } catch (JSONException e) {
-                        Log.d("erreur", "conversion JSON impossible" + e.toString());
+                    if (message[1].equals("synchroOk")) {
+
                     }
+
             }
             else if(message[0].equals("recupFrais"))
             {
