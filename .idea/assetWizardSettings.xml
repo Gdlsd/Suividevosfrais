@@ -64,8 +64,8 @@
                                     <map>
                                       <entry key="assetType" value="IMAGE" />
                                       <entry key="iconShape" value="NONE" />
-                                      <entry key="imageAsset" value="D:\Projets\Android\Suividevosfrais\app\src\main\res\drawable-hdpi\logout.png" />
-                                      <entry key="outputName" value="logout" />
+                                      <entry key="imageAsset" value="D:\Projets\Android\Suividevosfrais\app\src\main\res\drawable-hdpi\frais_repas_new.png" />
+                                      <entry key="outputName" value="frais_repas" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -75,7 +75,7 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="outputIconType" value="ACTIONBAR" />
+                            <entry key="outputIconType" value="LAUNCHER_LEGACY" />
                           </map>
                         </option>
                       </PersistentState>
