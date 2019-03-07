@@ -29,11 +29,12 @@
 
             <ImageView
                 android:id="@+id/imgEtpReturn"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_gravity="end"
+                android:layout_gravity="center"
                 android:layout_weight="1"
-                android:src="@drawable/frais_etape"
+                android:contentDescription="@string/icone_frais_etape"
+                android:src="@mipmap/frais_etape"
                 app:srcCompat="@mipmap/frais_etape"
                 tools:srcCompat="@mipmap/frais_etape" />
         </LinearLayout>

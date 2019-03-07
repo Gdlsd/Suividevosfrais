@@ -19,7 +19,7 @@ import fr.cned.emdsgil.suividevosfrais.outils.AsyncResponse;
 public class AccesDistant implements AsyncResponse {
 
     //constante
-    private static final String SERVERADDR = "http:/*******/suividevosfrais/serveursuivifrais.php";
+    private static final String SERVERADDR = "http://projets.g-dalessandro.com/suividevosfrais/serveursuivifrais.php";
     private Controle controle;
     private Context contexte;
 
@@ -47,10 +47,7 @@ public class AccesDistant implements AsyncResponse {
                 Log.d("authentification", "***************" + message[1]);
                 try {
                     if (message[1].equals("\"erreurLogin\"")) {
-                        AlertDialogManager alertDialogManager = new AlertDialogManager();
-                        alertDialogManager.showAlertDialog(contexte,
-                                "Connexion impossible",
-                                "Paramètre(s) de connexion incorrect(s)");
+                        Toast.makeText(contexte, "Paramètre(s) de connexion incorrect(s)", Toast.LENGTH_SHORT).show();
                     } else {
                         JSONObject info = new JSONObject(message[1]);
                         String id = info.getString("id");
@@ -72,14 +69,12 @@ public class AccesDistant implements AsyncResponse {
             }
             else if (message[0].equals("synchronisation")) {
                     Log.d("synchronisation", "***************" + message[1]);
-                    try {
-                        if (message[1].length() > 0) {
-                            //Récupération et enregistrement des frais sauvegardés sur la base distante
-                            JSONObject recupFrais = new JSONObject(message[1]);
-                        }
-                    } catch (JSONException e) {
-                        Log.d("erreur", "conversion JSON impossible" + e.toString());
+                    if (message[1].equals("synchroOk")) {
+                        //Mise à jour des frais dans l'appareil avec les données distantes
+                        //Dans le cas ou des frais auraient été ajoutés depuis l'application web
+                        controle.recupFrais(Global.idVisiteur);
                     }
+
             }
             else if(message[0].equals("recupFrais"))
             {

@@ -30,12 +30,12 @@
             <ImageView
                 android:id="@+id/imgKmReturn"
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
+                android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:adjustViewBounds="false"
                 android:scaleType="fitCenter"
-                android:src="@drawable/frais_km"
+                android:src="@mipmap/frais_km"
                 app:srcCompat="@mipmap/frais_km"
                 tools:srcCompat="@mipmap/frais_km" />
         </LinearLayout>

@@ -30,14 +30,14 @@
             <ImageView
                 android:id="@+id/imgRepReturn"
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
+                android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:contentDescription="@string/icone_frais_repas"
                 android:scaleType="fitCenter"
-                android:src="@drawable/frais_repas"
-                app:srcCompat="@drawable/frais_repas_new"
-                tools:srcCompat="@drawable/frais_repas_new" />
+                android:src="@mipmap/frais_repas"
+                app:srcCompat="@mipmap/frais_repas"
+                tools:srcCompat="@mipmap/frais_repas" />
         </LinearLayout>
 
         <LinearLayout

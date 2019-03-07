@@ -1,4 +1,5 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -29,12 +30,13 @@
             <ImageView
                 android:id="@+id/imgNuiReturn"
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
+                android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:contentDescription="@string/icone_frais_nuitee"
-                android:src="@drawable/frais_nuitee"
-                tools:srcCompat="@drawable/frais_nuitee_new" />
+                android:src="@mipmap/frais_nuitee"
+                app:srcCompat="@mipmap/frais_nuitee"
+                tools:srcCompat="@mipmap/frais_nuitee" />
         </LinearLayout>
 
         <LinearLayout
