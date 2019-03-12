@@ -20,6 +20,7 @@ public class AccesDistant implements AsyncResponse {
 
     //constante
     private static final String SERVERADDR = "http://projets.g-dalessandro.com/suividevosfrais/serveursuivifrais.php";
+
     private Controle controle;
     private Context contexte;
 
@@ -107,7 +108,6 @@ public class AccesDistant implements AsyncResponse {
                         Global.listFraisMois.get(key).setKm(km);
                         Global.listFraisMois.get(key).setNuitee(nuitee);
                         Global.listFraisMois.get(key).setRepas(repas);
-
                         for(int i = 0; i < lesFraisHf.length(); i++)
                         {
                             JSONObject unFrais = lesFraisHf.getJSONObject(i);

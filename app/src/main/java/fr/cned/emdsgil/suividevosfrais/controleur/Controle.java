@@ -80,7 +80,6 @@ public class Controle {
         JSONArray fraisMoisJSONArray = new JSONArray();
         fraisMoisJSONArray.put(Global.idVisiteur);
         fraisMoisJSONArray.put(fraisMoisJSON);
-
         Toast.makeText(contexte, "Vos frais ont été synchronisés.", Toast.LENGTH_SHORT).show();
 
         //Transfert des données au serveur
