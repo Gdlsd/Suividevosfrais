@@ -79,6 +79,11 @@ class FraisHfAdapter extends BaseAdapter {
 			holder.txtListMontant = convertView.findViewById(R.id.txtListMontant);
 			holder.txtListMotif = convertView.findViewById(R.id.txtListMotif);
 			holder.cmdSuppHf = convertView.findViewById(R.id.cmdSuppHf);
+
+			if(lesFrais.get(index).getNouveau() == false )
+			{
+				holder.cmdSuppHf.setVisibility(View.INVISIBLE);
+			}
 			//affectation du holder comme tag (étiquette) de la ligne
 			convertView.setTag(holder) ;
 		}else{
@@ -92,6 +97,7 @@ class FraisHfAdapter extends BaseAdapter {
 		holder.txtListMotif.setText(lesFrais.get(index).getMotif()) ;
 		//Mémorisation de l'indice de ligne en étiquette de cmdSuppHf pour récupérer cet indice dans l'évènement
 		holder.cmdSuppHf.setTag(index);
+
 
 		//Gestion de l'évènement click sur cmdSuppHf
 		holder.cmdSuppHf.setOnClickListener(new View.OnClickListener(){

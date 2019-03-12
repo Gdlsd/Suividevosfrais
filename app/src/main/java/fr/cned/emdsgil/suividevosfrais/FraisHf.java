@@ -11,11 +11,13 @@ class FraisHf  implements Serializable {
 	private final Float montant ;
 	private final String motif ;
 	private final Integer jour ;
-	
-	public FraisHf(Float montant, String motif, Integer jour) {
+	private Boolean nouveau = false;
+
+	public FraisHf(Float montant, String motif, Integer jour, Boolean nouveau) {
 		this.montant = montant ;
 		this.motif = motif ;
 		this.jour = jour ;
+		this.nouveau = nouveau;
 	}
 
 	public Float getMontant() {
@@ -30,4 +32,5 @@ class FraisHf  implements Serializable {
 		return jour;
 	}
 
+	public Boolean getNouveau() { return nouveau; }
 }

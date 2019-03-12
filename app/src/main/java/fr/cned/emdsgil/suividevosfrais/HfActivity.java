@@ -91,7 +91,7 @@ public class HfActivity extends AppCompatActivity {
 			// creation du mois et de l'annee s'ils n'existent pas déjà
 			Global.listFraisMois.put(key, new FraisMois(annee, mois)) ;
 		}
-		Global.listFraisMois.get(key).addFraisHf(montant, motif, jour) ;		
+		Global.listFraisMois.get(key).addFraisHf(montant, motif, jour, true) ;
 	}
 
 	/**

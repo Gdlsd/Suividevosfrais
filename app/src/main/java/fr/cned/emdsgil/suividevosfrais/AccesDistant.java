@@ -123,7 +123,7 @@ public class AccesDistant implements AsyncResponse {
 //                                // creation du mois et de l'annee s'ils n'existent pas déjà
 //                                Global.listFraisMois.put(key, new FraisMois(annee, mois)) ;
 //                            }
-                            Global.listFraisMois.get(key).addFraisHf(montantFraisHf, motifFraisHf, jourFraisHf) ;
+                            Global.listFraisMois.get(key).addFraisHf(montantFraisHf, motifFraisHf, jourFraisHf, false) ;
                         }
 
                         //Serialisation des frais à la place des frais existants
