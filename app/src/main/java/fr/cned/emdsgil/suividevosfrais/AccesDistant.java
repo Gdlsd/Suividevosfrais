@@ -19,7 +19,7 @@ import fr.cned.emdsgil.suividevosfrais.outils.AsyncResponse;
 public class AccesDistant implements AsyncResponse {
 
     //constante
-    private static final String SERVERADDR = "http://projets.g-dalessandro.com/suividevosfrais/serveursuivifrais.php";
+    private static final String SERVERADDR = "http://url/vers/le/serveur/distant";
 
     private Controle controle;
     private Context contexte;
