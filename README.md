@@ -1,7 +1,7 @@
 # Suividevosfrais
 Suivi de fiches de frais via une application android
 
-##Guide d'installation de l'application sur serveur local.  
+## Guide d'installation de l'application sur serveur local.  
   
 SuiviDeVosFrais nécessite l'installation d'une base de données et d'un d'un script de gestion de données sur serveur.  
 **La base de données utilisée est la même que l'application AppliFrais réalisée en amont.**  
@@ -18,7 +18,7 @@ Vous devriez avoir une url du type http://<votre IP>/serveursuividevosfrais/serv
 L'application peut désormais communiquer avec le serveur  
   
   
-##Ouvrir le projet avec Android Studio  
+## Ouvrir le projet avec Android Studio  
   
 * Lancez Android Studio  
 * Choisir "Start a new Android Studio project";  
