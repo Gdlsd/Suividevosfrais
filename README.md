@@ -1,4 +1,4 @@
-# Suividevosfrais
+# Suivi de vos frais
 Suivi de fiches de frais via une application android
 
 ## Guide d'installation de l'application sur serveur local.  
