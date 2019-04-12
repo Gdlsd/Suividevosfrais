@@ -4,7 +4,7 @@ Suivi de fiches de frais via une application android
 ## Guide d'installation de l'application sur serveur local.  
   
 SuiviDeVosFrais nécessite l'installation d'une base de données et d'un d'un script de gestion de données sur serveur.  
-**La base de données utilisée est la même que l'application AppliFrais réalisée en amont.**  
+**La base de données utilisée est la même que l'application AppliFrais réalisée en amont de cette application Android.**  
 Si cette base de donnée n'a pas été installée, vous pourrez récupérer le script avec l'application serveur à l'adresse suivante  
 https://github.com/Gdlsd/suividevosfrais-GestionFraisServer  
   
